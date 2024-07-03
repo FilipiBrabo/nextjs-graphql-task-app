@@ -1,1 +1,10 @@
-{}
+{
+  "loginPage": {
+    "title": "Acessar"
+  },
+  "loginForm": {
+    "password": { "label": "Senha" },
+    "email": { "label": "Email" },
+    "submit": "Acessar"
+  }
+}

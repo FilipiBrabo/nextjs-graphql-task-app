@@ -15,6 +15,7 @@ import { useCookies } from "react-cookie";
 import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { cookieName, getOptions, languages } from "./settings";
+import { useParams } from "next/navigation";
 
 const runsOnServerSide = typeof window === "undefined";
 
@@ -40,12 +41,11 @@ export function useClientTranslation<
   Ns extends FlatNamespace,
   KPrefix extends KeyPrefix<FallbackNs<Ns>> = undefined
 >(
-  lng: string,
   ns?: Ns,
   options?: UseTranslationOptions<KPrefix>
 ): UseTranslationResponse<FallbackNs<Ns>, KPrefix> {
   const [cookies, setCookie] = useCookies([cookieName]);
-
+  const { lng } = useParams<{ lng: string }>();
   const translation = useTranslationRaw(ns, options);
 
   const { i18n } = translation;
