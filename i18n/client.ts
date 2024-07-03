@@ -1,4 +1,4 @@
-// This file was taken from https://locize.com/blog/next-app-dir-i18n/
+// This file was derived from https://locize.com/blog/next-app-dir-i18n/
 
 "use client";
 
@@ -16,6 +16,8 @@ import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { cookieName, getOptions, languages } from "./settings";
 import { useParams } from "next/navigation";
+
+import zodPtTranslation from "zod-i18n-map/locales/pt/zod.json";
 
 const runsOnServerSide = typeof window === "undefined";
 
@@ -36,6 +38,8 @@ i18next
     },
     preload: runsOnServerSide ? languages : [],
   });
+
+i18next.addResourceBundle("pt", "zod", zodPtTranslation);
 
 export function useClientTranslation<
   Ns extends FlatNamespace,

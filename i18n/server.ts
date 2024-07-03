@@ -1,10 +1,11 @@
-// This file was taken from https://locize.com/blog/next-app-dir-i18n/
+// This file was derived from https://locize.com/blog/next-app-dir-i18n/
 
 import { createInstance, Namespace, FlatNamespace, KeyPrefix } from "i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next/initReactI18next";
 import { FallbackNs } from "react-i18next";
 import { getOptions } from "./settings";
+import zodPtTranslation from "zod-i18n-map/locales/pt/zod.json";
 
 const initI18next = async (lng: string, ns: string | string[]) => {
   // On server side we create a new instance for each render, because during compilation everything seems to be executed in parallel
@@ -18,6 +19,8 @@ const initI18next = async (lng: string, ns: string | string[]) => {
       )
     )
     .init(getOptions(lng, ns));
+
+  i18nInstance.addResourceBundle("pt", "zod", zodPtTranslation);
   return i18nInstance;
 };
 
