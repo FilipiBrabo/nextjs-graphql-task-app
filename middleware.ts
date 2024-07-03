@@ -3,6 +3,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import acceptLanguage from "accept-language";
 import { cookieName, fallbackLng, languages } from "./i18n";
+import { getSession } from "./lib/auth/getSession";
 
 acceptLanguage.languages(languages);
 
@@ -13,12 +14,15 @@ export const config = {
   ],
 };
 
-export function middleware(req: NextRequest) {
-  if (
-    req.nextUrl.pathname.indexOf("icon") > -1 ||
-    req.nextUrl.pathname.indexOf("chrome") > -1
-  )
-    return NextResponse.next();
+const publicRoutes = ["login"];
+const publicRoutesPattern = publicRoutes.join("|");
+const publicPathsRegex = new RegExp(`^\\/(pt|en)\\/(${publicRoutesPattern})$`);
+
+function isPublicRequest(pathname: string): boolean {
+  return publicPathsRegex.test(pathname);
+}
+
+export async function middleware(req: NextRequest) {
   let lng: string | undefined | null;
   if (req.cookies.has(cookieName))
     lng = acceptLanguage.get(req.cookies.get(cookieName)?.value);
@@ -33,6 +37,14 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(
       new URL(`/${lng}${req.nextUrl.pathname}`, req.url)
     );
+  }
+
+  const reqUrl = new URL(req.url);
+
+  const session = await getSession();
+
+  if (!session && !isPublicRequest(reqUrl.pathname)) {
+    return NextResponse.redirect(new URL(`/${lng}/login`, req.url));
   }
 
   if (req.headers.has("referer")) {

@@ -14,13 +14,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useClientTranslation } from "@/i18n";
+import { login } from "../actions";
 
 const loginFormSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1, { message: "This field is required" }),
 });
 
-type LoginFormValues = z.infer<typeof loginFormSchema>;
+export type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 export function LoginForm() {
   const { t } = useClientTranslation();
@@ -33,8 +34,10 @@ export function LoginForm() {
     },
   });
 
-  const onSubmit = (values: LoginFormValues) => {
-    console.log({ values });
+  const { isSubmitting } = form.formState;
+
+  const onSubmit = async (values: LoginFormValues) => {
+    await login(values);
   };
 
   return (
@@ -72,7 +75,11 @@ export function LoginForm() {
             </>
           )}
         />
-        <Button type="submit" className="w-full font-bold">
+        <Button
+          type="submit"
+          className="w-full font-bold"
+          isLoading={isSubmitting}
+        >
           {t("loginForm.submit", "Login")}
         </Button>
       </form>
