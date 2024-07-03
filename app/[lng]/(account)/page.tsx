@@ -54,7 +54,7 @@ export default async function Home({ params: { lng } }: HomePageProps) {
   const user = response?.data.user;
 
   return (
-    <div className="flex flex-col p-4 gap-8">
+    <div className="flex flex-col gap-8">
       <h2 className="text-2xl font-semibold tracking-tight lg:text-5xl">
         {t("homePage.welcome", "Welcome, {{ firstName }} {{ lastName }}", {
           firstName: user?.firstName,

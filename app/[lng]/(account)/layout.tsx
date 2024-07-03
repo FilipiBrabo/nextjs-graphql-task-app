@@ -22,7 +22,7 @@ export default function AccountLayout({
   return (
     <div className="grid h-screen grid-rows-[auto,1fr]">
       <Header lng={lng} />
-      <main>{children}</main>
+      <main className="p-8">{children}</main>
     </div>
   );
 }
