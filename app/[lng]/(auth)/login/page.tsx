@@ -10,9 +10,7 @@ export default async function LoginPage({ params: { lng } }: LoginPageProps) {
 
   return (
     <main className="mx-auto max-w-96 flex flex-col gap-4">
-      <h1 className="text-3xl font-bold">
-        {t("loginForm.email.label", "Login")}
-      </h1>
+      <h1 className="text-3xl font-bold">{t("loginPage.title", "Login")}</h1>
       <LoginForm />
     </main>
   );

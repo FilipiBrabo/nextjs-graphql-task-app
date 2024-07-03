@@ -8,7 +8,7 @@
     "submit": "Acessar"
   },
   "homePage": {
-    "welcome": "Bem-vindo",
+    "welcome": "Bem-vindo, {{ firstName }} {{ lastName }}",
     "tasks": "Tarefas"
   },
   "logout": "Sair"
