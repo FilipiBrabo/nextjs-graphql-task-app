@@ -1,7 +1,10 @@
 import { cookies } from "next/headers";
 import { decrypt } from "./encryption";
 
-export async function getSession(): Promise<{ token: string } | null> {
+export async function getSession(): Promise<{
+  token: string;
+  userId: string;
+} | null> {
   const session = cookies().get("session")?.value;
 
   if (!session) return null;

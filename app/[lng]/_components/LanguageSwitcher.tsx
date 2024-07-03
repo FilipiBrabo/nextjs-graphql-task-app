@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { useClientTranslation } from "@/i18n";
 
-export const LanguageSwitcher = () => {
+export const LanguageSwitcher = ({ className }: { className?: string }) => {
   const { i18n } = useClientTranslation();
 
   const currentLng = i18n.language;
@@ -25,7 +25,9 @@ export const LanguageSwitcher = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="font-bold flex items-center">
+      <DropdownMenuTrigger
+        className={cn("font-bold flex items-center", className)}
+      >
         {currentLng.toUpperCase()}
         <ChevronDown />
       </DropdownMenuTrigger>

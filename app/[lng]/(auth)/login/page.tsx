@@ -1,7 +1,11 @@
 import { LoginForm } from "./_components/LoginForm";
 import { useServerTranslation } from "@/i18n";
 
-export default async function LoginPage({ params: { lng } }: any) {
+interface LoginPageProps {
+  params: { lng: string };
+}
+
+export default async function LoginPage({ params: { lng } }: LoginPageProps) {
   const { t } = await useServerTranslation(lng);
 
   return (

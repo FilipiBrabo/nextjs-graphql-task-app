@@ -10,8 +10,6 @@ export const loginMutation = gql(`
       jwt
       user {
         id
-        username
-        email
       }
     }
   }
@@ -32,10 +30,19 @@ export async function login(email: string, password: string) {
         password,
       },
     });
-    const token = data?.login.jwt;
+
+    // TODO:
+    if (!data) return;
+
+    const token = data.login.jwt;
+    const userId = data.login.user.id;
 
     const expires = new Date(Date.now() + COOKIE_EXPIRATION_TIME);
-    const session = await encrypt({ token, expires });
+    const session = await encrypt({
+      token,
+      expires,
+      userId,
+    });
 
     cookies().set("session", session, { expires, httpOnly: true });
   } catch (error) {

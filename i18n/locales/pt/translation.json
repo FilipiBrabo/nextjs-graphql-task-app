@@ -6,5 +6,10 @@
     "password": { "label": "Senha" },
     "email": { "label": "Email" },
     "submit": "Acessar"
-  }
+  },
+  "homePage": {
+    "welcome": "Bem-vindo",
+    "tasks": "Tarefas"
+  },
+  "logout": "Sair"
 }

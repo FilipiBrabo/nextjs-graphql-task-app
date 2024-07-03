@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useClientTranslation } from "@/i18n";
-import { login } from "../actions";
+import { login } from "../loginAction";
 
 const loginFormSchema = z.object({
   email: z.string().email(),
@@ -24,7 +24,7 @@ const loginFormSchema = z.object({
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 export function LoginForm() {
-  const { t } = useClientTranslation();
+  const { t, i18n } = useClientTranslation();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -37,7 +37,7 @@ export function LoginForm() {
   const { isSubmitting } = form.formState;
 
   const onSubmit = async (values: LoginFormValues) => {
-    await login(values);
+    await login(values, { redirectTo: `/${i18n.language}/` });
   };
 
   return (

@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  mutation Login($email: String!, $password: String!) {\n    login(input: { identifier: $email, password: $password }) {\n      jwt\n      user {\n        id\n        username\n        email\n      }\n    }\n  }\n": types.LoginDocument,
+    "query User($id: ID!) {\n  user(id: $id) {\n    firstName\n    lastName\n  }\n}": types.UserDocument,
+    "\n  mutation Login($email: String!, $password: String!) {\n    login(input: { identifier: $email, password: $password }) {\n      jwt\n      user {\n        id\n      }\n    }\n  }\n": types.LoginDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation Login($email: String!, $password: String!) {\n    login(input: { identifier: $email, password: $password }) {\n      jwt\n      user {\n        id\n        username\n        email\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation Login($email: String!, $password: String!) {\n    login(input: { identifier: $email, password: $password }) {\n      jwt\n      user {\n        id\n        username\n        email\n      }\n    }\n  }\n"];
+export function gql(source: "query User($id: ID!) {\n  user(id: $id) {\n    firstName\n    lastName\n  }\n}"): (typeof documents)["query User($id: ID!) {\n  user(id: $id) {\n    firstName\n    lastName\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Login($email: String!, $password: String!) {\n    login(input: { identifier: $email, password: $password }) {\n      jwt\n      user {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation Login($email: String!, $password: String!) {\n    login(input: { identifier: $email, password: $password }) {\n      jwt\n      user {\n        id\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
