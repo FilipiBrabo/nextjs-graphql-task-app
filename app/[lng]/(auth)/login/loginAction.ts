@@ -49,12 +49,21 @@ export async function login(
       // Assuming 400 means user passed invalid values
       if (errorsCodes.includes(400)) {
         return {
-          errors: [{ field: "root", message: t("login.invalidCredentials") }],
+          errors: [
+            {
+              field: "root",
+              message: t("login.invalidCredentials", "Invalid Credentials"),
+            },
+          ],
         };
       }
     }
 
-    return { errors: [{ field: "root", message: t("api.500") }] };
+    return {
+      errors: [
+        { field: "root", message: t("api.500", "Internal Server Error") },
+      ],
+    };
   }
 
   if (options?.redirectTo) redirect(options.redirectTo);
