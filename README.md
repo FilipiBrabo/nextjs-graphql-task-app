@@ -1,4 +1,4 @@
-This is a simple [Next.js](https://nextjs.org/) project that consists in two pages.
+This is a simple [Next.js](https://nextjs.org/) project that consists in only two pages: login and account.
 
 ## How to run
 
