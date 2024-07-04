@@ -1,5 +1,11 @@
 {
   "form": {
     "required": "Este campo é obrigatório"
+  },
+  "login": {
+    "invalidCredentials": "Credenciais inválidas"
+  },
+  "api": {
+    "500": "Erro do servidor interno"
   }
 }

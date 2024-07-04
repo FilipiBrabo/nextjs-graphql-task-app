@@ -1,6 +1,6 @@
 import { getClient } from "@/apollo/client";
 import { gql } from "@/graphql/__generated__";
-import { useServerTranslation } from "@/i18n";
+import { getServerTranslation } from "@/i18n";
 import { getSession } from "@/lib/auth/getSession";
 import { redirect } from "next/navigation";
 
@@ -18,7 +18,7 @@ interface HomePageProps {
 }
 
 export default async function Home({ params: { lng } }: HomePageProps) {
-  const { t } = await useServerTranslation(lng);
+  const { t } = await getServerTranslation(lng);
 
   const session = await getSession();
   const client = getClient();

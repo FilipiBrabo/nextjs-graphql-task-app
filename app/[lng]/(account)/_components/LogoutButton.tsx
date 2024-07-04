@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useClientTranslation, useServerTranslation } from "@/i18n";
+import { useClientTranslation } from "@/i18n";
 import { LogOutIcon } from "lucide-react";
 import { useFormStatus } from "react-dom";
 

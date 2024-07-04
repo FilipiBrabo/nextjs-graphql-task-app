@@ -1,5 +1,11 @@
 {
   "form": {
     "required": "This field is required"
+  },
+  "login": {
+    "invalidCredentials": "Invalid credentials"
+  },
+  "api": {
+    "500": "Internal Server Error"
   }
 }

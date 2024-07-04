@@ -15,15 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useClientTranslation } from "@/i18n";
 import { login } from "../loginAction";
-
-const loginFormSchema = z.object({
-  email: z.string().min(1, { message: "form.required" }).email(),
-  password: z.string().min(1, {
-    message: "form.required",
-  }),
-});
-
-export type LoginFormValues = z.infer<typeof loginFormSchema>;
+import { LoginFormValues, loginFormSchema } from "../loginFormSchema";
 
 export function LoginForm() {
   const { t, i18n } = useClientTranslation();
@@ -36,10 +28,18 @@ export function LoginForm() {
     },
   });
 
-  const { isSubmitting } = form.formState;
+  const { isSubmitting, errors, isValid, isDirty, isSubmitted } =
+    form.formState;
 
   const onSubmit = async (values: LoginFormValues) => {
-    await login(values, { redirectTo: `/${i18n.language}/` });
+    const data = await login(values, {
+      lng: i18n.language,
+      redirectTo: `/${i18n.language}/`,
+    });
+
+    data?.errors.forEach((error) =>
+      form.setError(error.field, { message: error.message })
+    );
   };
 
   return (
@@ -77,10 +77,17 @@ export function LoginForm() {
             </>
           )}
         />
+        {errors.root && (
+          <div className={"text-[0.8rem] font-medium text-destructive"}>
+            {errors.root.message}
+          </div>
+        )}
+
         <Button
           type="submit"
           className="w-full font-bold"
           isLoading={isSubmitting}
+          disabled={!isValid && isSubmitted}
         >
           {t("loginForm.submit", "Login")}
         </Button>
