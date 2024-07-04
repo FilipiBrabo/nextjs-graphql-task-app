@@ -18,6 +18,8 @@ const publicRoutes = ["login"];
 const publicRoutesPattern = publicRoutes.join("|");
 const publicPathsRegex = new RegExp(`^\\/(pt|en)\\/(${publicRoutesPattern})$`);
 
+const loginPathRegex = new RegExp(/^\/(en|pt)\/login$/);
+
 function isPublicRequest(pathname: string): boolean {
   return publicPathsRegex.test(pathname);
 }
@@ -45,6 +47,8 @@ export async function middleware(req: NextRequest) {
 
   if (!session && !isPublicRequest(reqUrl.pathname)) {
     return NextResponse.redirect(new URL(`/${lng}/login`, req.url));
+  } else if (session && loginPathRegex.test(reqUrl.pathname)) {
+    return NextResponse.redirect(new URL(`/${lng}/`, req.url));
   }
 
   if (req.headers.has("referer")) {
