@@ -7,6 +7,7 @@ import { BuggyButton } from "../(auth)/login/_components/BuggyButton";
 import { TaskList } from "./_components/TaskList";
 import { Suspense } from "react";
 import { TaskListSkeleton } from "./_components/TaskList.skeleton";
+import { Separator } from "@/components/ui/separator";
 
 const userQuery = gql(`query User($id: ID!) {
   user(id: $id) {
@@ -47,15 +48,17 @@ export default async function Home({ params: { lng } }: HomePageProps) {
   const user = response?.data.user;
 
   return (
-    <div className="flex flex-col gap-8">
-      <h2 className="text-2xl font-semibold tracking-tight lg:text-5xl">
+    <div className="flex flex-col">
+      <h2 className="text-3xl font-semibold tracking-tight lg:text-4xl">
         {t("homePage.welcome", "Welcome, {{ firstName }} {{ lastName }}", {
           firstName: user?.firstName,
           lastName: user?.lastName,
         })}
       </h2>
-
-      <h1 className="text-2xl font-semibold">{t("homePage.tasks", "Tasks")}</h1>
+      <Separator className="mt-2 mb-8" />
+      <h1 className="text-2xl font-semibold mb-6">
+        {t("homePage.tasks", "Tasks")}
+      </h1>
       <Suspense fallback={<TaskListSkeleton />}>
         <TaskList lng={lng} />
       </Suspense>
