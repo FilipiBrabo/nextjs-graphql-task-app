@@ -4,6 +4,9 @@ import { getServerTranslation } from "@/i18n";
 import { getSession } from "@/lib/auth/getSession";
 import { redirect } from "next/navigation";
 import { BuggyButton } from "../(auth)/login/_components/BuggyButton";
+import { TaskList } from "./_components/TaskList";
+import { Suspense } from "react";
+import { TaskListSkeleton } from "./_components/TaskList.skeleton";
 
 const userQuery = gql(`query User($id: ID!) {
   user(id: $id) {
@@ -51,7 +54,12 @@ export default async function Home({ params: { lng } }: HomePageProps) {
           lastName: user?.lastName,
         })}
       </h2>
-      <div className="absolute right-4 bottom-4">
+
+      <h1 className="text-2xl font-semibold">{t("homePage.tasks", "Tasks")}</h1>
+      <Suspense fallback={<TaskListSkeleton />}>
+        <TaskList lng={lng} />
+      </Suspense>
+      <div className="fixed right-4 bottom-4">
         <BuggyButton />
       </div>
     </div>
