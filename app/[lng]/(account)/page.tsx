@@ -27,8 +27,7 @@ export default async function Home({ params: { lng } }: HomePageProps) {
   const token = session?.token;
 
   if (!session) {
-    // TODO:
-    redirect(`/${lng}/login`);
+    return redirect(`/${lng}/login`);
   }
 
   const response = await client.query({

@@ -28,8 +28,9 @@ export async function login(email: string, password: string) {
     },
   });
 
-  // TODO:
-  if (!data) return;
+  if (!data) {
+    throw new Error("Login mutation failed");
+  }
 
   const token = data.login.jwt;
   const userId = data.login.user.id;
