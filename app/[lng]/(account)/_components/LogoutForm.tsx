@@ -8,7 +8,7 @@ export async function LogoutForm({ lng }: { lng: string }) {
       action={async () => {
         "use server";
         await logout();
-        redirect(`/${lng}/`);
+        redirect(`/${lng}/login`);
       }}
     >
       <LogoutButton />
