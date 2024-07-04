@@ -2,13 +2,15 @@ This is a simple [Next.js](https://nextjs.org/) project that consists in only tw
 
 ## How to run
 
-Install dependencies
+- Install dependencies
 
 ```bash
 pnpm install
 ```
 
-Run the development server:
+- Create a `.env` file following the `.env.example` template
+
+- Run the development server:
 
 ```bash
 pnpm dev
