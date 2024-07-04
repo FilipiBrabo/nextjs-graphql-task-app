@@ -87,7 +87,7 @@ export function LoginForm() {
           type="submit"
           className="w-full font-bold"
           isLoading={isSubmitting}
-          disabled={!isValid && isSubmitted}
+          disabled={(!isValid && isSubmitted) || isSubmitting}
         >
           {t("loginForm.submit", "Login")}
         </Button>
