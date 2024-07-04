@@ -16,8 +16,6 @@ import { Input } from "@/components/ui/input";
 import { useClientTranslation } from "@/i18n";
 import { login } from "../loginAction";
 import { LoginFormValues, loginFormSchema } from "../loginFormSchema";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export function LoginForm() {
   const { t, i18n } = useClientTranslation();
@@ -43,13 +41,6 @@ export function LoginForm() {
       form.setError(error.field, { message: error.message })
     );
   };
-
-  const router = useRouter();
-
-  useEffect(() => {
-    // Prefetch home page so user has a instant transition after login
-    router.prefetch(`/${i18n.language}/`);
-  }, [i18n.language, router]);
 
   return (
     <Form {...form}>
