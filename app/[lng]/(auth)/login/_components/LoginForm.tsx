@@ -54,7 +54,7 @@ export function LoginForm() {
               <FormControl>
                 <Input placeholder="email@example.com" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage data-testid="email-error" />
             </FormItem>
           )}
         />
@@ -67,7 +67,7 @@ export function LoginForm() {
               <FormControl>
                 <Input type="password" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage data-testid="password-error" />
             </FormItem>
           )}
         />
