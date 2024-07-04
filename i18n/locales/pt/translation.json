@@ -11,5 +11,10 @@
     "welcome": "Bem-vindo, {{ firstName }} {{ lastName }}",
     "tasks": "Tarefas"
   },
-  "logout": "Sair"
+  "logout": "Sair",
+  "errorPage": {
+    "title": "Ops... Algo deu errado",
+    "reload": "Recarregar"
+  },
+  "buggyButton": "Lançar exceção"
 }

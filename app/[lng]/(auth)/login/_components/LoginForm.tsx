@@ -49,32 +49,26 @@ export function LoginForm() {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <>
-              <FormItem>
-                <FormLabel>{t("loginForm.email.label", "Email")}</FormLabel>
-                <FormControl>
-                  <Input placeholder="email@example.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </>
+            <FormItem>
+              <FormLabel>{t("loginForm.email.label", "Email")}</FormLabel>
+              <FormControl>
+                <Input placeholder="email@example.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
         />
         <FormField
           control={form.control}
           name="password"
           render={({ field }) => (
-            <>
-              <FormItem>
-                <FormLabel>
-                  {t("loginForm.password.label", "Password")}
-                </FormLabel>
-                <FormControl>
-                  <Input type="password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </>
+            <FormItem>
+              <FormLabel>{t("loginForm.password.label", "Password")}</FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
         />
         {errors.root && (

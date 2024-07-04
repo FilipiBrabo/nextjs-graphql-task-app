@@ -3,6 +3,7 @@ import { gql } from "@/graphql/__generated__";
 import { getServerTranslation } from "@/i18n";
 import { getSession } from "@/lib/auth/getSession";
 import { redirect } from "next/navigation";
+import { BuggyButton } from "../(auth)/login/_components/BuggyButton";
 
 const userQuery = gql(`query User($id: ID!) {
   user(id: $id) {
@@ -30,26 +31,16 @@ export default async function Home({ params: { lng } }: HomePageProps) {
     redirect(`/${lng}/login`);
   }
 
-  let response;
-  try {
-    response = await client.query({
-      query: userQuery,
-      variables: { id: session.userId },
-      // TODO: find a way to set this headers for all queries and mutations
-      context: {
-        headers: {
-          Authorization: token ? `Bearer ${token}` : "",
-        },
+  const response = await client.query({
+    query: userQuery,
+    variables: { id: session.userId },
+    // TODO: find a way to set this headers for all queries and mutations
+    context: {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
       },
-    });
-  } catch (error: unknown) {
-    // TODO: handle error
-    console.log({ error });
-  }
-
-  if (!response) {
-    // TODO: logout and redirect
-  }
+    },
+  });
 
   const user = response?.data.user;
 
@@ -61,6 +52,9 @@ export default async function Home({ params: { lng } }: HomePageProps) {
           lastName: user?.lastName,
         })}
       </h2>
+      <div className="absolute right-4 bottom-4">
+        <BuggyButton />
+      </div>
     </div>
   );
 }
