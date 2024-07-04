@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export async function Header({ lng }: HeaderProps) {
   return (
-    <nav className="flex w-full items-center justify-between border-b p-4 text-xl font-semibold gap-1">
+    <nav className="sticky top-0 flex w-full items-center justify-between border-b p-4 text-xl font-semibold gap-1 bg-white">
       <div>ACME Inc</div>
 
       <div className="flex items-center gap-2">
